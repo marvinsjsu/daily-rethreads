@@ -1,9 +1,11 @@
 import { useState } from "react";
 
 import FormInput from "../FormInput/form-input.component";
+import FormButton from "../FormButton/form-button.component";
 
 import { createUserDocumentFromAuth, createAuthUserWithEmailAndPassword } from "../../utils/firebase/firebase.utils";
 
+import "./user-registration.styles.scss";
 
 const initialFormData = {
     email: '',
@@ -63,7 +65,8 @@ const UserRegistration = () => {
 
     return (
         <div className="user-registration-container">
-            <h4>Create an Account</h4>
+            <h2>I do not have an account</h2>
+            <span>Sign up with your email and password</span>
             <form onSubmit={onFormSubmitHandler}>
                 <FormInput
                     required
@@ -103,9 +106,9 @@ const UserRegistration = () => {
                     label="Confirm Password"
                     onChange={onInputChangeHandler}
                 />
-                <button type="submit">
-                    Submit
-                </button>
+                <FormButton type="submit">
+                    Create Account
+                </FormButton>
             </form>
         </div>
     );
