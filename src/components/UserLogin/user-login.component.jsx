@@ -6,8 +6,9 @@ import FormButton from "../FormButton/form-button.component";
 import { getRedirectResult } from "firebase/auth";
 import {
     auth,
-    signInWithGooglePopup,
+    // signInWithGooglePopup,
     signInWithGoogleRedirect,
+    loginWithEmailAndPassword,
     createUserDocumentFromAuth,
 } from "../../utils/firebase/firebase.utils";
 
@@ -19,6 +20,7 @@ const initialFormData = {
 };
 
 const UserLogin = () => {
+    const [errorMessage, setErrorMessage] = useState(null);
     const [formData, setFormData] = useState(initialFormData);
     const { email, password } = formData;
 
@@ -35,11 +37,11 @@ const UserLogin = () => {
         getAuthResponse();
     }, []);
     
-    const loginGoogleUserHandler = async () => {
-        const { user } = await signInWithGooglePopup();
-        const userDocRef = await createUserDocumentFromAuth(user);
-        console.log({ userDocRef, user });
-    };
+    // const loginGoogleUserHandler = async () => {
+    //     const { user } = await signInWithGooglePopup();
+    //     const userDocRef = await createUserDocumentFromAuth(user);
+    //     console.log({ userDocRef, user });
+    // };
 
     const loginGoogleUserRedirectHandler = async () => {
         await signInWithGoogleRedirect();
@@ -53,15 +55,29 @@ const UserLogin = () => {
         });
     };
 
-    const onLoginSubmitHandler = (event) => {
+    const onLoginSubmitHandler = async (event) => {
         event.preventDefault();
-
+        try {
+            const response = await loginWithEmailAndPassword(email, password);
+            console.log({ response });
+        } catch(error) {
+            if (error.code === "auth/wrong-password"
+                || error.code === "auth/user-not-found"
+            ) {
+                setErrorMessage('Login failed - invalid credentials.');
+            }   
+        }
     };
 
     return (
         <div className="user-login-container">
             <h2>I already have an account</h2>
             <span>Sign in with your email and password</span>
+            {errorMessage && (
+                <div className="user-login-error">
+                    {errorMessage}
+                </div>
+            )}
             <form onSubmit={onLoginSubmitHandler}>
                 <FormInput
                     required
@@ -84,6 +100,7 @@ const UserLogin = () => {
                         Sign In
                     </FormButton>
                     <FormButton
+                        type="button"
                         buttonType="google"
                         onClick={loginGoogleUserRedirectHandler}
                     >
