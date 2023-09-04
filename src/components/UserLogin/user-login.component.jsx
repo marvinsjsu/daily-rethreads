@@ -9,7 +9,6 @@ import {
     // signInWithGooglePopup,
     signInWithGoogleRedirect,
     loginWithEmailAndPassword,
-    createUserDocumentFromAuth,
 } from "../../utils/firebase/firebase.utils";
 
 import "./user-login.styles.scss";
@@ -26,12 +25,7 @@ const UserLogin = () => {
 
     useEffect(() => {
         async function getAuthResponse() {
-            const response = await getRedirectResult(auth);
-
-            if (response) {
-                const userDocRef = await createUserDocumentFromAuth(response.user);
-                console.log({ userDocRef });
-            }
+            await getRedirectResult(auth);
         }
 
         getAuthResponse();
@@ -58,8 +52,7 @@ const UserLogin = () => {
     const onLoginSubmitHandler = async (event) => {
         event.preventDefault();
         try {
-            const response = await loginWithEmailAndPassword(email, password);
-            console.log({ response });
+            await loginWithEmailAndPassword(email, password);
         } catch(error) {
             if (error.code === "auth/wrong-password"
                 || error.code === "auth/user-not-found"
@@ -72,7 +65,7 @@ const UserLogin = () => {
     return (
         <div className="user-login-container">
             <h2>I already have an account</h2>
-            <span>Sign in with your email and password</span>
+            <span>Login with your email and password</span>
             {errorMessage && (
                 <div className="user-login-error">
                     {errorMessage}
@@ -97,14 +90,14 @@ const UserLogin = () => {
                 />
                 <div className="user-login-cta-container">
                     <FormButton type="submit">
-                        Sign In
+                        Login
                     </FormButton>
                     <FormButton
                         type="button"
                         buttonType="google"
                         onClick={loginGoogleUserRedirectHandler}
                     >
-                        Sign In with Google
+                        Login with Google
                     </FormButton>
                 </div>
             </form>

@@ -66,7 +66,7 @@ const UserRegistration = () => {
     return (
         <div className="user-registration-container">
             <h2>I do not have an account</h2>
-            <span>Sign up with your email and password</span>
+            <span>Create an account with your email and password</span>
             <form onSubmit={onFormSubmitHandler}>
                 <FormInput
                     required
