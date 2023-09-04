@@ -1,7 +1,11 @@
 import { useContext } from "react";
 import { Outlet, Link } from "react-router-dom";
 
+import CartIcon from "../../components/CartIcon/cart-icon.component";
+import CartDropdown from "../../components/CartDropdown/cart-dropdown.component";
+
 import { UserContext } from "../../contexts/user.context";
+
 import { logoutUser } from "../../utils/firebase/firebase.utils";
 
 import { ReactComponent as DRTLogo } from "../../assets/drt-logo.svg";
@@ -36,7 +40,9 @@ const Navigation = () => {
                             </Link>
                         )
                     }
+                    <CartIcon />
                 </div>
+                <CartDropdown />
             </div>
             <Outlet />
         </>
