@@ -1,0 +1,26 @@
+.checkout-item-container {
+    display: flex;
+    gap: 12px;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid black;
+    padding: 24px 0;
+
+    img {
+        width: 20%;
+    }
+
+    span {
+        width: 20%;
+        text-align: center;
+
+        .cta-item-quantity {
+            border: none;
+            outline: none;
+            background-color: transparent;
+            font-size: 1.2rem;
+            font-weight: 700;
+            cursor: pointer;
+        }
+    }
+}

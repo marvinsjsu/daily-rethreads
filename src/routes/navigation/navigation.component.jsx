@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { Outlet, Link } from "react-router-dom";
+import { Outlet, Link, NavLink } from "react-router-dom";
 
 import CartIcon from "../../components/CartIcon/cart-icon.component";
 import CartDropdown from "../../components/CartDropdown/cart-dropdown.component";
@@ -26,18 +26,18 @@ const Navigation = () => {
                     <DRTLogo className="logo" />
                 </Link>
                 <div className="nav-links-container">
-                    <Link className="nav-link" to="/shop">
+                    <NavLink className="nav-link" to="/shop">
                         SHOP
-                    </Link>
+                    </NavLink>
                     {currentUser
                         ? (
                             <span className="nav-link" onClick={onLogoutHandler}>
                                 LOGOUT
                             </span>
                         ) : (
-                            <Link className="nav-link" to="/auth">
+                            <NavLink className="nav-link" to="/auth">
                                 LOGIN
-                            </Link>
+                            </NavLink>
                         )
                     }
                     <CartIcon />

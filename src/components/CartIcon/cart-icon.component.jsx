@@ -8,13 +8,14 @@ import "./cart-icon.styles.scss";
 
 const CartIcon = () => {
     const { items, isVisible, setIsVisible } = useContext(CartContext);
+    const itemCount = items.reduce((acc, item) => acc += item.quantity, 0);
 
     const onToggleIconHandler = () => setIsVisible(!isVisible);
 
     return (
         <div className="cart-icon-container" onClick={onToggleIconHandler} >
             <ShoppingIcon className="shopping-icon"/>
-            <span className="item-count">{items.length}</span>
+            <span className="item-count">{itemCount}</span>
         </div>
     );
 };
