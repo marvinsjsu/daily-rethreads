@@ -1,9 +1,14 @@
 import { useState, useEffect, createContext } from "react";
 
 export const CartContext = createContext({
+    total: 0,
     items: [],
     isVisible: false,
-    setItems: () => null,
+    setIsVisible: () => null,
+    addItemToCart: () => null,
+    removeItemFromCart: () => null,
+    decreaseItemInCart: () => null,
+    increaseItemInCart: () => null,
 });
 
 const getItemIndex = (cartItems, product) => {
