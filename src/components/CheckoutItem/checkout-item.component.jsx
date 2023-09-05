@@ -8,21 +8,17 @@ import "./checkout-item.styles.scss"
 
 const CheckoutItem = ({ item }) => {
     const { name, price, quantity, imageUrl } = item;
-    const { updateCartItemQuantity, removeItemFromCart } = useContext(CartContext);
+    const {
+        removeItemFromCart,
+        increaseItemInCart,
+        decreaseItemInCart,
+    } = useContext(CartContext);
 
-    const onRemoveItemClickHandler = () => {
-        removeItemFromCart(item);
-    };
+    const onRemoveItemClickHandler = () => removeItemFromCart(item);
 
-    const onIncreaseQuantityClickHandler = () => {
-        updateCartItemQuantity(item, item.quantity + 1);
-    };
+    const onIncreaseQuantityClickHandler = () => increaseItemInCart(item);
 
-    const onDecreaseQuantityClickHandler = () => {
-        if (item.quantity > 0) {
-            updateCartItemQuantity(item, item.quantity - 1);
-        }
-    };
+    const onDecreaseQuantityClickHandler = () => decreaseItemInCart(item);
 
     return (
         <div className="checkout-item-container">
@@ -46,12 +42,13 @@ const CheckoutItem = ({ item }) => {
                 </button>
             </span>
             <span className="price">${price}</span>
-            <FormButton
+            <button
                 type="button"
+                className="cta-remove-item"
                 onClick={onRemoveItemClickHandler}
             >
-                remove
-            </FormButton>
+                &#10005;
+            </button>
         </div>
     );
 };
