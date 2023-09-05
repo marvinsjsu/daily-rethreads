@@ -7,18 +7,12 @@ import { CartContext } from "../../contexts/cart.context";
 import "./checkout.styles.scss";
 
 const Checkout = () => {
-    const { items } = useContext(CartContext);
-
-    const total = items.reduce((total, item) => {
-        total += item.quantity * item.price;
-        return total;
-    }, 0);
-
+    const { items, total } = useContext(CartContext);
     return (
         <div className="checkout-container">
             <div className="checkout-items-header">
                 <span>Image</span>
-                <span>Name</span>
+                <span>Description</span>
                 <span>Quantity</span>
                 <span>Price</span>
                 <span>Remove</span>
