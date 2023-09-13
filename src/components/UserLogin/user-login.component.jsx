@@ -6,9 +6,10 @@ import FormButton from "../FormButton/form-button.component";
 import { getRedirectResult } from "firebase/auth";
 import {
     auth,
-    // signInWithGooglePopup,
+    signInWithGooglePopup,
     signInWithGoogleRedirect,
     loginWithEmailAndPassword,
+    createUserDocumentFromAuth,
 } from "../../utils/firebase/firebase.utils";
 
 import "./user-login.styles.scss";
@@ -31,11 +32,11 @@ const UserLogin = () => {
         getAuthResponse();
     }, []);
     
-    // const loginGoogleUserHandler = async () => {
-    //     const { user } = await signInWithGooglePopup();
-    //     const userDocRef = await createUserDocumentFromAuth(user);
-    //     console.log({ userDocRef, user });
-    // };
+    const loginGoogleUserHandler = async () => {
+        const { user } = await signInWithGooglePopup();
+        const userDocRef = await createUserDocumentFromAuth(user);
+        console.log({ userDocRef, user });
+    };
 
     const loginGoogleUserRedirectHandler = async () => {
         await signInWithGoogleRedirect();
@@ -95,7 +96,8 @@ const UserLogin = () => {
                     <FormButton
                         type="button"
                         buttonType="google"
-                        onClick={loginGoogleUserRedirectHandler}
+                        // onClick={loginGoogleUserRedirectHandler}
+                        onClick={loginGoogleUserHandler}
                     >
                         Login with Google
                     </FormButton>

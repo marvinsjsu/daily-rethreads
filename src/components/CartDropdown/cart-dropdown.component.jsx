@@ -1,28 +1,33 @@
-import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from 'react-redux';
 
 import FormButton from '../FormButton/form-button.component';
 import CartItem from "../CartItem/cart-item.component";
 
-import { CartContext } from "../../contexts/cart.context";
+import { CartActions } from "../../actions/cart.actions";
+
+import { selectCartItems, selectIsVisible } from '../../selectors/cart.selectors';
 
 import "./cart-dropdown.styles.scss";
 
 const CartDropdown = () => {
-    const { items, isVisible, setIsVisible } = useContext(CartContext);
+    const cartItems = useSelector(selectCartItems);
+    const isVisible = useSelector(selectIsVisible);
+
+    const dispatch = useDispatch();
     const navigate = useNavigate();
 
     if (!isVisible) return null;
 
     const onCheckoutClickHandler = () => {
-        setIsVisible(!isVisible);
+        dispatch(CartActions.toggleCartVisibility());
         navigate("/checkout");
     };
 
     return (
         <div className="cart-dropdown-container">
             <div className="cart-items">
-                {items.map(item => (
+                {cartItems.map(item => (
                     <CartItem
                         key={item.id}
                         item={item}

@@ -1,24 +1,19 @@
-import { useContext } from "react";
+import { useDispatch } from 'react-redux';
 
-import FormButton from "../FormButton/form-button.component";
-
-import { CartContext } from "../../contexts/cart.context";
+import { CartActions } from "../../actions/cart.actions";
 
 import "./checkout-item.styles.scss"
 
 const CheckoutItem = ({ item }) => {
     const { name, price, quantity, imageUrl } = item;
-    const {
-        removeItemFromCart,
-        increaseItemInCart,
-        decreaseItemInCart,
-    } = useContext(CartContext);
 
-    const onRemoveItemClickHandler = () => removeItemFromCart(item);
+    const dispatch = useDispatch();
 
-    const onIncreaseQuantityClickHandler = () => increaseItemInCart(item);
+    const onRemoveItemClickHandler = () => dispatch(CartActions.removeItemFromCart(item));
 
-    const onDecreaseQuantityClickHandler = () => decreaseItemInCart(item);
+    const onIncreaseQuantityClickHandler = () => dispatch(CartActions.addItemToCart(item));
+
+    const onDecreaseQuantityClickHandler = () => dispatch(CartActions.decreaseItemQuantityInCart(item));
 
     return (
         <div className="checkout-item-container">
