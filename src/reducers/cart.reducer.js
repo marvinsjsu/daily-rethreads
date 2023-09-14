@@ -9,8 +9,8 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
     const { type, payload } = action;
-    
-    switch(type) {
+
+    switch (type) {
         case CartActionTypes.ADD_ITEM_TO_CART: {
             return {
                 ...state,

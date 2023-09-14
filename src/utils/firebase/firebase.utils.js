@@ -21,12 +21,12 @@ import {
 } from "firebase/auth";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBbzXsaCBmrYMEP79Nt7u5QGfpv2iiSvEI",
-  authDomain: "daily-rethreads.firebaseapp.com",
-  projectId: "daily-rethreads",
-  storageBucket: "daily-rethreads.appspot.com",
-  messagingSenderId: "873289999576",
-  appId: "1:873289999576:web:bacc1e3731b7d9e05563ad"
+    apiKey: "AIzaSyBbzXsaCBmrYMEP79Nt7u5QGfpv2iiSvEI",
+    authDomain: "daily-rethreads.firebaseapp.com",
+    projectId: "daily-rethreads",
+    storageBucket: "daily-rethreads.appspot.com",
+    messagingSenderId: "873289999576",
+    appId: "1:873289999576:web:bacc1e3731b7d9e05563ad"
 };
 
 const firebaseApp = initializeApp(firebaseConfig);

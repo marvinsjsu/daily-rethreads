@@ -31,7 +31,7 @@ const UserLogin = () => {
 
         getAuthResponse();
     }, []);
-    
+
     const loginGoogleUserHandler = async () => {
         const { user } = await signInWithGooglePopup();
         const userDocRef = await createUserDocumentFromAuth(user);
@@ -54,12 +54,12 @@ const UserLogin = () => {
         event.preventDefault();
         try {
             await loginWithEmailAndPassword(email, password);
-        } catch(error) {
+        } catch (error) {
             if (error.code === "auth/wrong-password"
                 || error.code === "auth/user-not-found"
             ) {
                 setErrorMessage('Login failed - invalid credentials.');
-            }   
+            }
         }
     };
 
@@ -87,7 +87,7 @@ const UserLogin = () => {
                     label="Password"
                     name="password"
                     value={password}
-                    onChange={onInputChangeHandler}                
+                    onChange={onInputChangeHandler}
                 />
                 <div className="user-login-cta-container">
                     <FormButton type="submit">

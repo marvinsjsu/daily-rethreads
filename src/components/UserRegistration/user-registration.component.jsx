@@ -36,7 +36,7 @@ const UserRegistration = () => {
 
     const onFormSubmitHandler = async (event) => {
         event.preventDefault();
-        
+
         if (password !== confirmPassword) {
             setErrorData({
                 ...errorData,

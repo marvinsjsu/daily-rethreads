@@ -1,9 +1,6 @@
 
 export const getCartTotal = (items) => {
     const value = items.reduce((total, item) => total + item.price * item.quantity, 0);
-    
-    console.log('GETCARTTOTAL: ', { items, value });
-    
     return value;
 };
 
@@ -13,7 +10,7 @@ export const findItemInCart = (cartItems, itemToFind) => {
     let itemIdx = false;
     cartItems.forEach((item, idx) => {
         if (item.id === itemToFind.id) {
-            itemIdx = idx; 
+            itemIdx = idx;
         }
     });
 
@@ -30,7 +27,7 @@ export const addItemInCart = (cartItems, itemToAdd) => {
             }
             return item;
         });
-    
+
     return newCartItems;
 };
 

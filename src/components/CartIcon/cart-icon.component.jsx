@@ -10,14 +10,14 @@ import "./cart-icon.styles.scss";
 
 const CartIcon = () => {
     const cartCount = useSelector(selectCartCount);
-    
+
     const dispatch = useDispatch();
 
     const onToggleIconHandler = () => dispatch(CartActions.toggleCartVisibility());
 
     return (
         <div className="cart-icon-container" onClick={onToggleIconHandler} >
-            <ShoppingIcon className="shopping-icon"/>
+            <ShoppingIcon className="shopping-icon" />
             <span className="item-count">{cartCount}</span>
         </div>
     );

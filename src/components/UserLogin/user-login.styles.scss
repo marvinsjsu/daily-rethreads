@@ -1,16 +1,16 @@
 .user-login-container {
+  display: flex;
+  flex-direction: column;
+  width: 380px;
+
+  h2 {
+    margin: 12px 0;
+  }
+
+  .user-login-cta-container {
     display: flex;
     flex-direction: column;
-    width: 380px;
-
-    h2 {
-        margin: 12px 0;
-    }
-
-    .user-login-cta-container {
-        display: flex;
-        flex-direction: column;
-        gap: 8px;
-        padding: 12px 0;
-    }
+    gap: 8px;
+    padding: 12px 0;
+  }
 }

@@ -1,7 +1,7 @@
 
 import "./form-input.styles.scss";
 
-const FormInput = ({ label, ...otherProps  }) => {
+const FormInput = ({ label, ...otherProps }) => {
     const labelClassName = otherProps.value.length ? 'shrink' : null;
     return (
         <div className="form-input-container">

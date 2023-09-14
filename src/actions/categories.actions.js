@@ -18,16 +18,14 @@ export const CategoriesActions = {
         type: CategoriesActionTypes.FETCH_CATEGORIES_FAILED,
         payload: error,
     }),
+    getCategories: () => async (dispatch) => {
+        try {
+            dispatch(CategoriesActions.fetchCategoriesStarted());
+            const categories = await getCategoriesAndDocuments();
+            dispatch(CategoriesActions.fetchCategoriesSucceeded(categories));
+        } catch (error) {
+            console.log('Error fetching categories: ', error.message);
+            dispatch(CategoriesActions.fetchCategoriesFailed(error.message));
+        }
+    },
 };
-
-export const getCategories = () => async (dispatch) => {
-    try {
-        dispatch(CategoriesActions.fetchCategoriesStarted());
-        const categories = await getCategoriesAndDocuments();
-        dispatch(CategoriesActions.fetchCategoriesSucceeded(categories));
-    } catch(error) {
-        console.log('Error fetching categories: ', error.message);
-        dispatch(CategoriesActions.fetchCategoriesFailed(error.message));
-    }
-};
-

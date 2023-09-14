@@ -7,8 +7,8 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
     const { type, payload } = action;
-    
-    switch(type) {
+
+    switch (type) {
         case UserActionTypes.SET_CURRENT_USER: {
             return {
                 ...state,

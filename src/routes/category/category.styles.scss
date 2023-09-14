@@ -1,13 +1,13 @@
 .category-container {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    column-gap: 10px;
-    row-gap: 50px;
-    padding: 12px 0 24px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  column-gap: 10px;
+  row-gap: 50px;
+  padding: 12px 0 24px;
 
-    .title {
-        font-size: 28px;
-        margin-bottom: 25px;
-        text-align: center;
-    }
+  .title {
+    font-size: 28px;
+    margin-bottom: 25px;
+    text-align: center;
+  }
 }

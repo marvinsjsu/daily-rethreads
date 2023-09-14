@@ -9,12 +9,11 @@ import Checkout from "../../routes/checkout/checkout.component";
 import Navigation from "../../routes/navigation/navigation.component";
 
 import { UserActions } from '../../actions/user.actions';
-import { CategoriesActions, getCategories } from '../../actions/categories.actions';
+import { CategoriesActions } from '../../actions/categories.actions';
 
 import {
   onAuthStateChangedListener,
   createUserDocumentFromAuth,
-  getCategoriesAndDocuments,
 } from "../../utils/firebase/firebase.utils";
 
 const App = () => {
@@ -33,19 +32,7 @@ const App = () => {
   }, []);
 
   useEffect(() => {
-    async function getCategories() {
-      try {
-        dispatch(CategoriesActions.fetchCategoriesStarted());
-        const categories = await getCategoriesAndDocuments();
-        dispatch(CategoriesActions.fetchCategoriesSucceeded(categories));
-      } catch (error) {
-        console.log('Error fetching categories: ', error.message);
-        dispatch(CategoriesActions.fetchCategoriesFailed(error.message));
-      }
-
-    }
-
-    getCategories();
+    dispatch(CategoriesActions.getCategories());
   }, []);
 
   return (

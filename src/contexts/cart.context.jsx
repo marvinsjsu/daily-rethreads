@@ -44,7 +44,7 @@ const decreaseItemQuantity = (cartItems, cartItem) => {
             if (item.quantity > 0) {
                 item.quantity--;
             }
-        } 
+        }
 
         return item;
     });
@@ -54,7 +54,7 @@ const increaseItemQuantity = (cartItems, cartItem) => {
     return cartItems.map(item => {
         if (item.id === cartItem.id) {
             item.quantity++;
-        } 
+        }
 
         return item;
     });
