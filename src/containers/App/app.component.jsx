@@ -32,7 +32,7 @@ const App = () => {
   }, []);
 
   useEffect(() => {
-    dispatch(CategoriesActions.getCategories());
+    dispatch(CategoriesActions.getCategoriesAsync());
   }, []);
 
   return (

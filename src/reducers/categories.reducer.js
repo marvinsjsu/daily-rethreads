@@ -8,8 +8,10 @@ const initialState = {
 };
 
 const reducer = (state = initialState, action) => {
-  switch (action.type) {
-    case CategoriesActionTypes.FETCH_CATEGORIES_PENDING: {
+  const { type, payload } = action;
+
+  switch (type) {
+    case CategoriesActionTypes.FETCH_CATEGORIES_START: {
       return {
         ...state,
         isLoading: true,
@@ -19,14 +21,14 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         isLoading: false,
-        categories: action.payload,
+        categories: payload,
       };
     }
     case CategoriesActionTypes.FETCH_CATEGORIES_FAILED: {
       return {
         ...state,
         isLoading: false,
-        error: action.payload,
+        error: payload,
       }
     }
     default: {
