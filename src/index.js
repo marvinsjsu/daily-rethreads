@@ -4,9 +4,6 @@ import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 
 import App from './containers/App/app.component';
-// import { UserProvider } from './contexts/user.context';
-// import { CategoriesProvider } from './contexts/categories.context';
-// import { CartProvider } from './contexts/cart.context';
 import { store } from './store/store';
 
 import reportWebVitals from './reportWebVitals';
