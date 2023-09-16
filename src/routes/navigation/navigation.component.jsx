@@ -1,12 +1,12 @@
 import { Outlet, Link, NavLink } from "react-router-dom";
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import CartIcon from "../../components/CartIcon/cart-icon.component";
 import CartDropdown from "../../components/CartDropdown/cart-dropdown.component";
 
-import { selectCurrentUser } from "../../selectors/user.selectors";
+import { UserActions } from "../../actions/user.actions";
 
-import { logoutUser } from "../../utils/firebase/firebase.utils";
+import { selectCurrentUser } from "../../selectors/user.selectors";
 
 import { ReactComponent as DRTLogo } from "../../assets/drt-logo.svg";
 
@@ -15,8 +15,10 @@ import './navigation.styles.scss';
 const Navigation = () => {
   const currentUser = useSelector(selectCurrentUser);
 
+  const dispatch = useDispatch();
+
   const onLogoutHandler = async () => {
-    await logoutUser();
+    dispatch(UserActions.userSignOutStart());
   };
 
   return (

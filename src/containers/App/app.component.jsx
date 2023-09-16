@@ -11,28 +11,16 @@ import Navigation from "../../routes/navigation/navigation.component";
 import { UserActions } from '../../actions/user.actions';
 import { CategoriesActions } from '../../actions/categories.actions';
 
-import {
-  onAuthStateChangedListener,
-  createUserDocumentFromAuth,
-} from "../../utils/firebase/firebase.utils";
 
 const App = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChangedListener((user) => {
-      if (user) {
-        createUserDocumentFromAuth(user);
-      }
-
-      dispatch(UserActions.setCurrentUser(user));
-    });
-
-    return unsubscribe;
+    dispatch(UserActions.checkUserSession());
   }, []);
 
   useEffect(() => {
-    dispatch(CategoriesActions.getCategoriesAsync());
+    dispatch(CategoriesActions.fetchCategoriesStart());
   }, []);
 
   return (

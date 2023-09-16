@@ -1,16 +1,12 @@
 import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 import FormInput from "../FormInput/form-input.component";
 import FormButton from "../FormButton/form-button.component";
 
-import { getRedirectResult } from "firebase/auth";
-import {
-    auth,
-    signInWithGooglePopup,
-    signInWithGoogleRedirect,
-    loginWithEmailAndPassword,
-    createUserDocumentFromAuth,
-} from "../../utils/firebase/firebase.utils";
+import { UserActions } from "../../actions/user.actions";
+
+import { selectUserError } from "../../selectors/user.selectors";
 
 import "./user-login.styles.scss";
 
@@ -20,27 +16,15 @@ const initialFormData = {
 };
 
 const UserLogin = () => {
-    const [errorMessage, setErrorMessage] = useState(null);
+    const errorMessage = useSelector(selectUserError);
     const [formData, setFormData] = useState(initialFormData);
     const { email, password } = formData;
 
+    const dispatch = useDispatch();
+
     useEffect(() => {
-        async function getAuthResponse() {
-            await getRedirectResult(auth);
-        }
-
-        getAuthResponse();
+      dispatch(UserActions.getAuthRedirectResult());
     }, []);
-
-    const loginGoogleUserHandler = async () => {
-        const { user } = await signInWithGooglePopup();
-        const userDocRef = await createUserDocumentFromAuth(user);
-        console.log({ userDocRef, user });
-    };
-
-    const loginGoogleUserRedirectHandler = async () => {
-        await signInWithGoogleRedirect();
-    };
 
     const onInputChangeHandler = (event) => {
         const { name, value } = event.target;
@@ -50,28 +34,21 @@ const UserLogin = () => {
         });
     };
 
+    const loginGoogleUserHandler = async () => {
+      dispatch(UserActions.googleSignInStart());
+    };
+
     const onLoginSubmitHandler = async (event) => {
         event.preventDefault();
-        try {
-            await loginWithEmailAndPassword(email, password);
-        } catch (error) {
-            if (error.code === "auth/wrong-password"
-                || error.code === "auth/user-not-found"
-            ) {
-                setErrorMessage('Login failed - invalid credentials.');
-            }
-        }
+        dispatch(UserActions.emailSignInStart(email, password));
     };
+
+    console.log({ errorMessage });
 
     return (
         <div className="user-login-container">
             <h2>I already have an account</h2>
             <span>Login with your email and password</span>
-            {errorMessage && (
-                <div className="user-login-error">
-                    {errorMessage}
-                </div>
-            )}
             <form onSubmit={onLoginSubmitHandler}>
                 <FormInput
                     required
@@ -96,7 +73,6 @@ const UserLogin = () => {
                     <FormButton
                         type="button"
                         buttonType="google"
-                        // onClick={loginGoogleUserRedirectHandler}
                         onClick={loginGoogleUserHandler}
                     >
                         Login with Google
